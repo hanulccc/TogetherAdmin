@@ -1,0 +1,895 @@
+﻿<Window
+    x:Class="SangAdmin.User.DlgUserDetail"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SangAdmin.User"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="DlgUserDetail"
+    Width="924"
+    Height="874"
+    AllowsTransparency="True"
+    Background="Transparent"
+    BorderBrush="Transparent"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Grid>
+        <Border
+            x:Name="bdMain"
+            BorderBrush="#EEEEEE"
+            BorderThickness="1">
+            <DockPanel Margin="30,20">
+                <Label
+                    Margin="0,0,0,20"
+                    Padding="0"
+                    Content="회원 상세정보"
+                    DockPanel.Dock="Top"
+                    FontSize="18"
+                    FontWeight="Bold"
+                    Foreground="#5BB4AA" />
+                <Border
+                    BorderBrush="#5BB4AA"
+                    BorderThickness="0,0,0,2"
+                    CornerRadius="0"
+                    DockPanel.Dock="Top" />
+                <DockPanel Margin="0,30,0,0" DockPanel.Dock="Top">
+                    <Grid
+                        Width="80"
+                        Height="80"
+                        Margin="0,0,20,0"
+                        VerticalAlignment="Top"
+                        MouseLeftButtonDown="Image_MouseLeftButtonDown">
+                        <Border
+                            Width="80"
+                            BorderBrush="#EEEEEE"
+                            BorderThickness="1"
+                            CornerRadius="40" />
+                        <Ellipse Margin="1">
+                            <Ellipse.Fill>
+                                <ImageBrush x:Name="imgProfile" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+
+                        <Button
+                            Width="24"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Click="btnCamera_Click"
+                            Visibility="Collapsed">
+                            <Image Source="/SangAdmin;component/Resources/Camera.png" />
+                        </Button>
+                    </Grid>
+                    <DockPanel VerticalAlignment="Center">
+                        <DockPanel DockPanel.Dock="Top">
+                            <Label
+                                x:Name="lbUserName"
+                                Content="홍길동"
+                                FontSize="18"
+                                FontWeight="Bold"
+                                Foreground="#474c4c" />
+                            <Label
+                                Content="쉘퍼"
+                                FontSize="16"
+                                Foreground="#474c4c" />
+                        </DockPanel>
+                        <Label
+                            x:Name="lbUserId"
+                            Content="avcdef123@naver.com"
+                            Foreground="#999999" />
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Right">
+                        <Label
+                            Margin="0,0,12,0"
+                            Content="승인여부"
+                            FontSize="14" />
+                        <ComboBox
+                            x:Name="cboProfileYn"
+                            Width="88"
+                            HorizontalAlignment="Center"
+                            HorizontalContentAlignment="Center" />
+
+                        <Border
+                            Height="20"
+                            Margin="10,0,0,0"
+                            BorderThickness="1"
+                            CornerRadius="1" />
+
+                        <Button
+                            x:Name="btnChange"
+                            Width="110"
+                            Click="btnDriver_Click"
+                            Content="정보 수정 내역"
+                            Style="{StaticResource btnGreenBorder}" />
+                        <Button
+                            Width="83"
+                            Click="btnDriver_Click"
+                            Content="이용내역"
+                            Style="{StaticResource btnGreenBorder}" />
+                    </DockPanel>
+                </DockPanel>
+
+
+                <DockPanel Margin="0,30,0,0" DockPanel.Dock="Top">
+                    <Button
+                        x:Name="btnDefaultInfo"
+                        Height="30"
+                        Click="btnChangePage_Click"
+                        Content="기본 정보"
+                        FontSize="14"
+                        Style="{StaticResource ChoiceTab}"
+                        Tag="choice" />
+                    <Button
+                        x:Name="btnVirtualAccnt"
+                        Margin="20,0,0,0"
+                        Click="btnChangePage_Click"
+                        Content="계좌 및 보험 정보"
+                        FontSize="14"
+                        Style="{StaticResource UnChoiceTab}"
+                        Tag="unchoice" />
+                    <Button
+                        x:Name="btnShelperInfo"
+                        Margin="20,0,0,0"
+                        HorizontalAlignment="Left"
+                        Click="btnChangePage_Click"
+                        Content="쉘퍼 정보"
+                        FontSize="14"
+                        Style="{StaticResource UnChoiceTab}"
+                        Tag="unchoice" />
+                </DockPanel>
+
+                <Border
+                    Width="864"
+                    BorderThickness="1"
+                    CornerRadius="1"
+                    DockPanel.Dock="Top" />
+
+
+
+                <Grid
+                    x:Name="gridDefaultInfo"
+                    Margin="0,30,0,0"
+                    DockPanel.Dock="Top"
+                    Visibility="Visible">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition Height="2*" />
+                    </Grid.RowDefinitions>
+
+                    <DockPanel Margin="0,0,30,20">
+                        <Label
+                            Width="135"
+                            Content="이름"
+                            FontSize="14" />
+                        <TextBox x:Name="txtUserName" />
+                    </DockPanel>
+
+                    <DockPanel Grid.Column="1" Margin="30,0,0,20">
+                        <Label
+                            Width="135"
+                            Content="소속사"
+                            FontSize="14" />
+                        <TextBox x:Name="txtAgent" />
+                    </DockPanel>
+
+                    <DockPanel Grid.Row="1" Margin="0,0,30,20">
+                        <Label
+                            Width="135"
+                            Content="주민번호"
+                            FontSize="14" />
+                        <TextBox x:Name="txtResidentNo" VerticalAlignment="Bottom" />
+                    </DockPanel>
+
+                    <DockPanel
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="30,0,0,20">
+                        <Label
+                            Width="135"
+                            Content="활동지역(도)"
+                            FontSize="14" />
+                        <TextBox x:Name="txtActiveArea1" />
+                    </DockPanel>
+
+                    <DockPanel Grid.Row="2" Margin="0,0,30,20">
+                        <Label
+                            Width="135"
+                            Content="핸드폰번호"
+                            FontSize="14" />
+                        <TextBox x:Name="txtUserPh" />
+                    </DockPanel>
+
+                    <DockPanel
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Margin="30,0,0,20">
+                        <Label
+                            Width="135"
+                            Content="활동지역(시)"
+                            FontSize="14" />
+                        <TextBox x:Name="txtActiveArea2" />
+                    </DockPanel>
+
+                    <DockPanel Grid.Row="3" Margin="0,0,30,20">
+                        <Label
+                            Width="135"
+                            Content="가상번호"
+                            FontSize="14" />
+                        <TextBox x:Name="txtUserVPh" Width="197" />
+                        <Button
+                            x:Name="btnVirtNo"
+                            Width="62"
+                            HorizontalAlignment="Right"
+                            Click="btnVirtNo_Click"
+                            Content="발급"
+                            FontWeight="Bold"
+                            Style="{StaticResource btnBorder}" />
+                    </DockPanel>
+
+                    <DockPanel
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Margin="30,0,0,20">
+                        <Label
+                            Width="135"
+                            Content="대리기사 경력"
+                            FontSize="14" />
+                        <TextBox x:Name="txtCareer" />
+                    </DockPanel>
+
+                    <DockPanel Grid.Row="4" Margin="0,0,30,20">
+                        <Label
+                            Width="135"
+                            Content="이메일주소"
+                            FontSize="14" />
+                        <TextBox x:Name="txtUserId" />
+                    </DockPanel>
+
+                    <DockPanel
+                        Grid.Row="4"
+                        Grid.Column="1"
+                        Margin="30,0,0,20">
+                        <Label
+                            Width="135"
+                            Content="약관동의일"
+                            FontSize="14" />
+                        <TextBox x:Name="txtTermsDate" IsReadOnly="True" />
+                    </DockPanel>
+
+                    <DockPanel Grid.Row="5" Margin="0,0,30,20">
+                        <Label
+                            Width="135"
+                            Content="탈퇴여부"
+                            FontSize="14" />
+                        <ComboBox x:Name="cboLeaveYn" HorizontalAlignment="Left" />
+                    </DockPanel>
+
+                    <DockPanel
+                        Grid.Row="5"
+                        Grid.Column="1"
+                        Margin="30,0,0,20">
+                        <Label
+                            Width="135"
+                            Content="탈퇴일자"
+                            FontSize="14" />
+                        <DatePicker
+                            x:Name="txtLeaveDate"
+                            Width="120"
+                            HorizontalAlignment="Left"
+                            IsEnabled="False" />
+                    </DockPanel>
+
+                    <DockPanel
+                        Grid.Row="6"
+                        Grid.ColumnSpan="2"
+                        Margin="0,0,0,20">
+                        <Label
+                            Width="135"
+                            Content="탈퇴사유"
+                            FontSize="14" />
+                        <TextBox x:Name="txtLeaveMemo" IsReadOnly="True" />
+                    </DockPanel>
+
+                    <DockPanel Grid.Row="7" Grid.ColumnSpan="2">
+                        <Label
+                            Width="135"
+                            VerticalAlignment="Top"
+                            Content="메모"
+                            FontSize="14" />
+                        <TextBox x:Name="txtAdminMemo" Height="90" />
+                    </DockPanel>
+                </Grid>
+
+
+
+                <Grid
+                    x:Name="gridVirtualAccnt"
+                    Height="auto"
+                    VerticalAlignment="Top"
+                    DockPanel.Dock="Top"
+                    Visibility="Collapsed">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="58" />
+                        <RowDefinition Height="75" />
+                        <RowDefinition Height="45" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Border
+                        Grid.RowSpan="4"
+                        Grid.ColumnSpan="2"
+                        Width="1"
+                        Height="535"
+                        BorderThickness="1"
+                        CornerRadius="1" />
+
+                    <DockPanel Margin="0,23,30,0">
+                        <Label
+                            Content="가상계좌 정보"
+                            FontSize="14"
+                            FontWeight="Bold" />
+                        <Button
+                            x:Name="btnAccTrade"
+                            HorizontalAlignment="Right"
+                            Click="btnAccTrade_Click"
+                            Content="계좌 내역"
+                            Style="{StaticResource btnGreenBorder}" />
+                    </DockPanel>
+                    <DockPanel Grid.Row="1" Margin="0,30,30,10">
+                        <Label
+                            Width="135"
+                            Content="은행명"
+                            FontSize="14" />
+                        <ComboBox x:Name="cboBank" Width="Auto">
+                            <ComboBoxItem Content="KEB하나은행" />
+                            <ComboBoxItem Content="국민은행" />
+                            <ComboBoxItem Content="기업은행" />
+                            <ComboBoxItem Content="신한은행" />
+                            <ComboBoxItem Content="우리은행" />
+                        </ComboBox>
+                    </DockPanel>
+                    <DockPanel
+                        Grid.Row="2"
+                        Margin="0,10,30,0"
+                        VerticalAlignment="Center">
+                        <Label
+                            Width="135"
+                            Content="가상계좌"
+                            FontSize="14" />
+                        <TextBox x:Name="txtAccount" Width="197" />
+                        <Button
+                            x:Name="btnAccCtl"
+                            Width="62"
+                            HorizontalAlignment="Right"
+                            Click="btnAccCtl_Click"
+                            Content="발급"
+                            FontWeight="Bold"
+                            Style="{StaticResource btnBorder}" />
+                    </DockPanel>
+
+
+
+                    <DockPanel Grid.Column="1" Margin="30,23,0,0">
+                        <Label
+                            Content="보험 정보"
+                            FontSize="14"
+                            FontWeight="Bold" />
+                    </DockPanel>
+                    <DockPanel
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="30,30,0,10">
+                        <Label
+                            Width="135"
+                            Content="보험증권번호"
+                            FontSize="14" />
+                        <TextBox x:Name="txtBoNo" />
+                    </DockPanel>
+                    <DockPanel
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Margin="30,10,0,0"
+                        VerticalAlignment="Center">
+                        <Label
+                            Width="135"
+                            Content="보험 시작일"
+                            FontSize="14" />
+                        <DatePicker
+                            x:Name="txtBoFrDate"
+                            Width="120"
+                            HorizontalAlignment="Left" />
+                    </DockPanel>
+                    <DockPanel
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Margin="30,20,0,0"
+                        VerticalAlignment="Top">
+                        <Label
+                            Width="135"
+                            Content="보험 만료일"
+                            FontSize="14" />
+                        <DatePicker
+                            x:Name="txtBoToDate"
+                            Width="120"
+                            HorizontalAlignment="Left" />
+                    </DockPanel>
+                </Grid>
+
+
+                <Grid
+                    x:Name="gridShelperInfo"
+                    DockPanel.Dock="Top"
+                    Visibility="Collapsed">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="58" />
+                        <RowDefinition Height="75" />
+                        <RowDefinition Height="45" />
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Border
+                        Grid.RowSpan="6"
+                        Grid.ColumnSpan="2"
+                        Width="1"
+                        Height="535"
+                        BorderThickness="1"
+                        CornerRadius="1" />
+
+                    <DockPanel Margin="0,23,30,0">
+                        <Label
+                            Content="쉘퍼 정보"
+                            FontSize="14"
+                            FontWeight="Bold" />
+                        <Button
+                            HorizontalAlignment="Right"
+                            Click="btnShelper_Click"
+                            Content="쉘퍼 이용 내역"
+                            Style="{StaticResource btnGreenBorder}" />
+                    </DockPanel>
+                    <DockPanel Grid.Row="1" Margin="0,30,30,10">
+                        <Label
+                            Width="135"
+                            Content="면허번호"
+                            FontSize="14" />
+                        <TextBox x:Name="txtLicenseNum" />
+                    </DockPanel>
+                    <DockPanel
+                        Grid.Row="2"
+                        Margin="0,10,30,0"
+                        VerticalAlignment="Center">
+                        <Label
+                            Width="135"
+                            Content="면허 만료일"
+                            FontSize="14" />
+                        <DatePicker
+                            x:Name="txtLicenseDt"
+                            Width="120"
+                            HorizontalAlignment="Left" />
+                    </DockPanel>
+                    <DockPanel
+                        Grid.Row="3"
+                        Margin="0,10,30,0"
+                        VerticalAlignment="Center">
+                        <Label
+                            Width="135"
+                            Content="쉘퍼 가입일"
+                            FontSize="14" />
+                        <DatePicker
+                            x:Name="txtRegDate"
+                            Width="120"
+                            HorizontalAlignment="Left" />
+                    </DockPanel>
+                    <DockPanel
+                        Grid.Row="4"
+                        Margin="0,10,30,0"
+                        VerticalAlignment="Center">
+                        <Label
+                            Width="135"
+                            Content="승인여부"
+                            FontSize="14" />
+                        <ComboBox
+                            x:Name="cboLicenseYn"
+                            Width="88"
+                            HorizontalAlignment="Left"
+                            HorizontalContentAlignment="Center" />
+                    </DockPanel>
+                    <DockPanel
+                        Grid.Row="5"
+                        Margin="0,10,30,0"
+                        VerticalAlignment="Center">
+                        <Label
+                            Width="135"
+                            VerticalAlignment="Top"
+                            Content="면허증 사진"
+                            FontSize="14" />
+                        <Border
+                            Width="280"
+                            Height="170"
+                            Style="{StaticResource bdSearch}">
+                            <Image
+                                x:Name="imgLicense"
+                                Cursor="Hand"
+                                MouseLeftButtonDown="Image_MouseLeftButtonDown"
+                                Stretch="Fill" />
+                        </Border>
+                    </DockPanel>
+
+
+
+
+                    <DockPanel Grid.Column="1" Margin="30,10,0,0">
+                        <Label
+                            Padding="0"
+                            Content="차량 정보"
+                            FontSize="14"
+                            FontWeight="Bold" />
+                    </DockPanel>
+                    <DockPanel
+                        Grid.Row="1"
+                        Grid.RowSpan="3"
+                        Grid.Column="1"
+                        Margin="30,0,0,0">
+                        <DataGrid
+                            x:Name="ctlGrid"
+                            CanUserReorderColumns="True"
+                            CanUserResizeRows="False"
+                            HorizontalScrollBarVisibility="Auto"
+                            IsReadOnly="True"
+                            RowHeaderWidth="30"
+                            UseLayoutRounding="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn
+                                    Width="auto"
+                                    MinWidth="75"
+                                    Binding="{Binding Path=run_yn}"
+                                    Header="운행여부" />
+                                <DataGridTextColumn
+                                    Width="100"
+                                    MinWidth="80"
+                                    Binding="{Binding Path=car_num}"
+                                    Header="차량번호" />
+                                <DataGridTextColumn
+                                    Width="*"
+                                    MinWidth="100"
+                                    Binding="{Binding Path=car_model}"
+                                    Header="모델명" />
+                                <DataGridTextColumn
+                                    Width="80"
+                                    MinWidth="60"
+                                    Binding="{Binding Path=car_max}"
+                                    Header="탑승인원" />
+                                <DataGridTemplateColumn
+                                    Width="80"
+                                    MinWidth="60"
+                                    Header="차량전면"
+                                    IsReadOnly="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Image
+                                                Margin="2"
+                                                Cursor="Hand"
+                                                MouseLeftButtonDown="Image_MouseLeftButtonDown"
+                                                Source="{Binding Path=car_img}"
+                                                Stretch="Fill" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn
+                                    Width="80"
+                                    MinWidth="60"
+                                    Header="차량증권"
+                                    IsReadOnly="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Image
+                                                Margin="2"
+                                                Cursor="Hand"
+                                                MouseLeftButtonDown="Image_MouseLeftButtonDown"
+                                                Source="{Binding Path=bohum_img}"
+                                                Stretch="Fill" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn
+                                    Width="80"
+                                    MinWidth="60"
+                                    Header="등록증"
+                                    IsReadOnly="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Image
+                                                Cursor="Hand"
+                                                MouseLeftButtonDown="Image_MouseLeftButtonDown"
+                                                Source="{Binding Path=regi_img}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn
+                                    Width="80"
+                                    MinWidth="60"
+                                    Header="사진심사"
+                                    IsReadOnly="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox
+                                                x:Name="carok_yn"
+                                                HorizontalAlignment="Center"
+                                                IsChecked="{Binding Path=carok_yn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn
+                                    Width="80"
+                                    MinWidth="60"
+                                    Header="서류심사"
+                                    IsReadOnly="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox
+                                                x:Name="docu_info_yn"
+                                                HorizontalAlignment="Center"
+                                                IsChecked="{Binding Path=docu_info_yn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </DockPanel>
+
+                    <DockPanel
+                        Grid.Row="4"
+                        Grid.Column="1"
+                        Margin="30,0,0,0"
+                        VerticalAlignment="Bottom">
+                        <Label
+                            Content="패널티 정보"
+                            FontSize="14"
+                            FontWeight="Bold" />
+                        <Button
+                            Width="54"
+                            Click="btnSave4_Click"
+                            Content="등록"
+                            DockPanel.Dock="Right"
+                            FontWeight="Bold"
+                            Style="{StaticResource btnGreenBorder}" />
+                        <Button
+                            Width="54"
+                            HorizontalAlignment="Right"
+                            Click="btnPenaltyDel_Click"
+                            Content="삭제"
+                            FontWeight="Bold"
+                            Style="{StaticResource btnBorder}" />
+                    </DockPanel>
+
+                    <Grid
+                        Grid.Row="5"
+                        Grid.Column="1"
+                        Margin="30,10,0,0">
+                        <DataGrid
+                            x:Name="ctlPenalty"
+                            Width="400"
+                            Height="200"
+                            VerticalAlignment="Top"
+                            CanUserReorderColumns="True"
+                            CanUserResizeRows="False"
+                            HorizontalScrollBarVisibility="Auto"
+                            IsReadOnly="True"
+                            RowHeaderWidth="30"
+                            UseLayoutRounding="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn
+                                    Width="80"
+                                    MinWidth="80"
+                                    Binding="{Binding Path=fr_date}"
+                                    Header="시작일" />
+                                <DataGridTextColumn
+                                    Width="80"
+                                    MinWidth="80"
+                                    Binding="{Binding Path=to_date}"
+                                    Header="종료일" />
+                                <DataGridTextColumn
+                                    Width="*"
+                                    MinWidth="100"
+                                    Binding="{Binding Path=reason}"
+                                    Header="사유" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Border
+                            x:Name="WritePenalty"
+                            Width="355"
+                            Height="120"
+                            Margin="0,0,0,0"
+                            VerticalAlignment="Top"
+                            BorderBrush="#FF2196F3"
+                            BorderThickness="2"
+                            Visibility="Collapsed">
+                            <DockPanel VerticalAlignment="Top" LastChildFill="True">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="40" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="70" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30" />
+                                        <RowDefinition Height="40" />
+                                        <RowDefinition Height="40" />
+                                    </Grid.RowDefinitions>
+                                    <DockPanel
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="3"
+                                        Background="#FF2196F3">
+                                        <Label
+                                            Margin="10,3,0,0"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Top"
+                                            Content="패널티등록"
+                                            FontWeight="Bold"
+                                            Foreground="White" />
+                                        <Button
+                                            x:Name="btnClose"
+                                            Width="35"
+                                            Height="30"
+                                            Margin="0,0,0,0"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Top"
+                                            Background="{x:Null}"
+                                            BorderBrush="{x:Null}"
+                                            Click="btnClose_Click"
+                                            Foreground="White"
+                                            Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                                            <materialDesign:PackIcon
+                                                Width="25"
+                                                Height="25"
+                                                Kind="Close" />
+                                        </Button>
+                                    </DockPanel>
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="0"
+                                        Width="Auto"
+                                        Height="Auto"
+                                        Margin="0,5,0,0"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Top"
+                                        Content="기간 : "
+                                        FontWeight="Bold"
+                                        Foreground="#4c9def" />
+                                    <DatePicker
+                                        x:Name="txtFrDate"
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        Width="115"
+                                        Margin="5,8,0,0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        BorderBrush="#FF007ACC"
+                                        Foreground="Black" />
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        Width="Auto"
+                                        Margin="123,7,0,0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        Content="~"
+                                        Foreground="#ff222222" />
+                                    <DatePicker
+                                        x:Name="txtToDate"
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        Grid.ColumnSpan="2"
+                                        Width="115"
+                                        Margin="140,7,0,0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        BorderBrush="#FF007ACC"
+                                        Foreground="Black" />
+                                    <Label
+                                        Grid.Row="2"
+                                        Grid.Column="0"
+                                        Width="Auto"
+                                        Height="Auto"
+                                        Margin="0,6,0,0"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Top"
+                                        Content="사유 : "
+                                        FontWeight="Bold"
+                                        Foreground="#4c9def" />
+                                    <TextBox
+                                        x:Name="txtReason"
+                                        Grid.Row="2"
+                                        Grid.Column="1"
+                                        Width="230"
+                                        Margin="5,5,0,5"
+                                        HorizontalAlignment="Left"
+                                        Text="" />
+                                    <Button
+                                        x:Name="btnPenaltySave"
+                                        Grid.Row="1"
+                                        Grid.RowSpan="2"
+                                        Grid.Column="2"
+                                        Width="60"
+                                        Height="36"
+                                        Margin="0,30,0,0"
+                                        Padding="0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Background="#d34a46"
+                                        BorderBrush="#d34a46"
+                                        Click="btnPenaltySave_Click"
+                                        Cursor="Hand">
+                                        <Grid Width="50">
+                                            <materialDesign:PackIcon VerticalAlignment="Center" Kind="ContentSave" />
+                                            <TextBlock
+                                                Margin="15,0,0,0"
+                                                HorizontalAlignment="Center"
+                                                FontSize="12"
+                                                Text="저장" />
+                                        </Grid>
+                                    </Button>
+                                </Grid>
+                            </DockPanel>
+                        </Border>
+                    </Grid>
+                </Grid>
+
+
+                <Border
+                    Width="864"
+                    Height="5"
+                    Margin="0,0,0,0"
+                    BorderThickness="0,1,0,0"
+                    CornerRadius="1"
+                    DockPanel.Dock="Top" />
+                <DockPanel
+                    Height="40"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom">
+                    <Button
+                        Click="btnClose_Click"
+                        Content="닫기"
+                        Style="{StaticResource btnRoundBorder}" />
+                    <Button
+                        Click="btnSave_Click"
+                        Content="저장"
+                        Style="{StaticResource btnGreenRound}" />
+                </DockPanel>
+            </DockPanel>
+        </Border>
+
+
+        <Border
+            x:Name="borBackground"
+            Margin="0"
+            Padding="0"
+            Panel.ZIndex="101"
+            Background="#000"
+            Opacity="0.15"
+            Visibility="Collapsed" />
+    </Grid>
+</Window>

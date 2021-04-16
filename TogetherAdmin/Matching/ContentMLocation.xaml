@@ -1,0 +1,204 @@
+﻿<UserControl
+    x:Class="SangAdmin.Matching.ContentMLocation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cefSharp="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SangAdmin.Matching"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    Background="Transparent"
+    mc:Ignorable="d">
+    <DockPanel>
+        <Border
+            Height="75"
+            Padding="19"
+            DockPanel.Dock="Top">
+            <DockPanel>
+                <DockPanel Visibility="Collapsed">
+                    <Label Content="지역" Style="{StaticResource lbBold}" />
+                    <ComboBox Width="110" Margin="10,0,30,0">
+                        <ComboBoxItem Content="전국" IsSelected="True" />
+                        <ComboBoxItem Content="서울" />
+                        <ComboBoxItem Content="경기" />
+                        <ComboBoxItem Content="인천" />
+                        <ComboBoxItem Content="세종" />
+                        <ComboBoxItem Content="대전" />
+                        <ComboBoxItem Content="광주" />
+                        <ComboBoxItem Content="대구" />
+                        <ComboBoxItem Content="울산" />
+                        <ComboBoxItem Content="부산" />
+                    </ComboBox>
+                    <Label Content="상태" Style="{StaticResource lbBold}" />
+                    <ComboBox Width="110" Margin="10,0,30,0">
+                        <ComboBoxItem Content="전체" IsSelected="True" />
+                        <ComboBoxItem Content="대기" />
+                        <ComboBoxItem Content="승차" />
+                        <ComboBoxItem Content="매칭" />
+                        <ComboBoxItem Content="취소" />
+                        <ComboBoxItem Content="종료" />
+                    </ComboBox>
+                    <Label Content="사용자" Style="{StaticResource lbBold}" />
+                    <Border
+                        Width="180"
+                        Margin="10,0,0,0"
+                        HorizontalAlignment="Left"
+                        Background="#F7F8F8"
+                        BorderThickness="0"
+                        CornerRadius="5">
+                        <Grid>
+                            <DockPanel Visibility="Visible">
+                                <Button
+                                    Click="btnType_Click"
+                                    Content="전체"
+                                    Style="{StaticResource btnType}" />
+                                <Button
+                                    Width="70"
+                                    Click="btnType_Click"
+                                    Content="드라이버"
+                                    Style="{StaticResource btnType}" />
+                                <Button
+                                    Click="btnType_Click"
+                                    Content="쉘퍼"
+                                    Style="{StaticResource btnType}" />
+                            </DockPanel>
+                            <DockPanel>
+                                <Label
+                                    x:Name="lbTypeAll"
+                                    Content="전체"
+                                    Style="{StaticResource lbType}" />
+                                <Label
+                                    x:Name="lbTypeDriver"
+                                    Width="70"
+                                    Content="드라이버"
+                                    Style="{StaticResource lbType}"
+                                    Visibility="Hidden" />
+                                <Label
+                                    x:Name="lbTypeShelper"
+                                    Content="쉘퍼"
+                                    Style="{StaticResource lbType}"
+                                    Visibility="Hidden" />
+                            </DockPanel>
+                        </Grid>
+                    </Border>
+                </DockPanel>
+
+
+
+                <DockPanel>
+                    <Label Content="거리(m)" Style="{StaticResource lbBold}" />
+                    <Border Margin="10,0,0,0" Style="{StaticResource bdSearch}">
+                        <TextBox
+                            x:Name="txtDistance"
+                            Style="{StaticResource waterMark}"
+                            Tag="거리(m) 입력" />
+                    </Border>
+                    <TextBlock
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Center"
+                        Foreground="#C2C4C4"
+                        Text="※ 거리(m) 검색창에 숫자입력 후 지도 위의 유저 1명을 마우스 클릭 시 입력된 숫자 거리안의 유저리스트가 표시됩니다." />
+
+                    <Button
+                        Width="35"
+                        Height="35"
+                        Padding="5,5,4,3"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Click="btnExcelDown_Click"
+                        Style="{StaticResource btnBorder}">
+                        <Button.Content>
+                            <Image Source="/SangAdmin;component/Resources/ExcelDown.png" />
+                        </Button.Content>
+                    </Button>
+                </DockPanel>
+            </DockPanel>
+        </Border>
+        <DockPanel Margin="0,5,0,0" DockPanel.Dock="Top">
+            <Label
+                Height="55"
+                Content="사용자 위치 현황"
+                FontSize="15"
+                FontWeight="Bold"
+                Foreground="#5E6262" />
+            <Button
+                Width="110"
+                Height="35"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Background="#5BB4AA"
+                BorderThickness="0"
+                Click="btnMsgSend_Click"
+                Content="메세지 보내기"
+                Foreground="White" />
+        </DockPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <cefSharp:ChromiumWebBrowser
+                    x:Name="chromeBrowser"
+                    Grid.Row="0"
+                    Margin="0,0,15,0" />
+            </Grid>
+
+            <DataGrid
+                x:Name="ctlGrid"
+                Grid.Column="1"
+                CanUserReorderColumns="True"
+                CanUserResizeRows="False"
+                HorizontalScrollBarVisibility="Auto"
+                IsReadOnly="True"
+                RowHeaderWidth="30"
+                UseLayoutRounding="False">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Width="Auto" MinWidth="50">
+                        <DataGridTemplateColumn.Header>
+                            <CheckBox
+                                Name="chkAll"
+                                Margin="10,0,0,0"
+                                Checked="chkAll_Checked"
+                                Unchecked="chkAll_Unchecked" />
+                        </DataGridTemplateColumn.Header>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox
+                                    x:Name="chkYn"
+                                    Margin="10,0,0,0"
+                                    IsChecked="{Binding chkYn, UpdateSourceTrigger=PropertyChanged}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn
+                        Width="*"
+                        MinWidth="100"
+                        Binding="{Binding Path=user_name}"
+                        Header="사용자" />
+                    <DataGridTextColumn
+                        Width="*"
+                        MinWidth="80"
+                        Binding="{Binding Path=pickup_statusNm}"
+                        Header="상태" />
+                    <DataGridTextColumn
+                        Width="*"
+                        MinWidth="115"
+                        Binding="{Binding Path=drive_fee}"
+                        Header="감사포인트" />
+                    <DataGridTextColumn
+                        Width="*"
+                        MinWidth="180"
+                        Binding="{Binding Path=user_addr}"
+                        Header="현위치" />
+                    <DataGridTextColumn
+                        Width="*"
+                        MinWidth="180"
+                        Binding="{Binding Path=end_addr}"
+                        Header="도착지" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </DockPanel>
+</UserControl>

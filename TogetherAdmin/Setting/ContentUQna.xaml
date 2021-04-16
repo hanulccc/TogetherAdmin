@@ -1,0 +1,470 @@
+﻿<UserControl
+    x:Class="SangAdmin.Setting.ContentUQna"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SangAdmin.Matching"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="800"
+    d:DesignWidth="2000"
+    mc:Ignorable="d">
+    <DockPanel>
+        <Border
+            Height="75"
+            Padding="19"
+            DockPanel.Dock="Top">
+            <DockPanel>
+                <Label
+                    Margin="0,0,10,0"
+                    Content="조회기간"
+                    Style="{StaticResource lbBold}" />
+                <DatePicker
+                    x:Name="txtFrDate"
+                    Width="120"
+                    SelectedDateChanged="query_SelectionChanged" />
+                <Label
+                    Width="20"
+                    HorizontalContentAlignment="Center"
+                    Content="-"
+                    FontSize="15" />
+                <DatePicker
+                    x:Name="txtToDate"
+                    Width="120"
+                    SelectedDateChanged="query_SelectionChanged" />
+
+                <Label
+                    Margin="30,0,0,0"
+                    Content="검색"
+                    Style="{StaticResource lbBold}" />
+                <ComboBox x:Name="cboSearch" Margin="10,0,10,0">
+                    <ComboBoxItem Content="전체" IsSelected="True" />
+                    <ComboBoxItem Content="이름" />
+                    <ComboBoxItem Content="연락처" />
+                </ComboBox>
+                <Border Style="{StaticResource bdSearch}">
+                    <DockPanel>
+                        <TextBox
+                            x:Name="txtSrch"
+                            Width="190"
+                            KeyDown="txtSrch_KeyDown"
+                            Style="{StaticResource waterMark}"
+                            Tag="검색어 입력" />
+                        <Button
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Click="btnQuery_Click">
+                            <Button.Content>
+                                <Image Width="20" Source="/SangAdmin;component/Resources/SearchIcon.png" />
+                            </Button.Content>
+                        </Button>
+                    </DockPanel>
+                </Border>
+                <Button
+                    Width="35"
+                    Height="35"
+                    Padding="5,5,4,3"
+                    HorizontalAlignment="Right"
+                    Click="btnExcelDown_Click"
+                    Style="{StaticResource btnBorder}">
+                    <Button.Content>
+                        <Image Source="/SangAdmin;component/Resources/ExcelDown.png" />
+                    </Button.Content>
+                </Button>
+            </DockPanel>
+        </Border>
+        <DockPanel Margin="0,5,0,0" DockPanel.Dock="Top">
+            <Label
+                Height="55"
+                Margin="0,0,30,0"
+                Content="묻고 답하기"
+                FontSize="15"
+                FontWeight="Bold"
+                Foreground="#5E6262" />
+            <Button
+                Width="60"
+                Height="35"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Background="#E6E8E8"
+                BorderThickness="0"
+                Click="btnDelete_Click"
+                Content="삭제"
+                FontSize="13"
+                FontWeight="Bold"
+                Foreground="#474C4C" />
+        </DockPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="630" />
+            </Grid.ColumnDefinitions>
+            <DataGrid
+                x:Name="ctlGrid"
+                CanUserReorderColumns="True"
+                CanUserResizeRows="False"
+                HorizontalScrollBarVisibility="Auto"
+                IsReadOnly="True"
+                RowHeaderWidth="30"
+                SelectionChanged="ctlGrid_SelectionChanged"
+                UseLayoutRounding="False">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Width="Auto" MinWidth="50">
+                        <DataGridTemplateColumn.Header>
+                            <CheckBox
+                                Name="chkAll"
+                                Margin="10,0,0,0"
+                                Checked="chkAll_Checked"
+                                Unchecked="chkAll_Unchecked" />
+                        </DataGridTemplateColumn.Header>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox
+                                    x:Name="chkYn"
+                                    Margin="10,0,0,0"
+                                    IsChecked="{Binding chkYn, UpdateSourceTrigger=PropertyChanged}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="50"
+                        Binding="{Binding Path=id}"
+                        Header="No"
+                        Visibility="Hidden" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="60"
+                        Binding="{Binding Path=is_read}"
+                        Header="읽음"
+                        Visibility="Hidden" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="60"
+                        Binding="{Binding Path=user_id}"
+                        Header="UserId"
+                        Visibility="Hidden" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="100"
+                        Binding="{Binding Path=user_name}"
+                        Header="드라이버 이름" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="110"
+                        Binding="{Binding Path=user_ph}"
+                        Header="핸드폰번호" />
+                    <DataGridTextColumn
+                        Width="*"
+                        MinWidth="400"
+                        Binding="{Binding Path=contents}"
+                        Header="묻고답하기" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="170"
+                        Binding="{Binding Path=insert_dt, StringFormat={}{0:yyyy/MM/dd HH:mm:ss}}"
+                        Header="마지막작성일" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Grid Grid.Row="0" Grid.Column="1">
+                <Border
+                    x:Name="bdMessage"
+                    Margin="15,0,0,0"
+                    BorderBrush="#EEEEEE"
+                    BorderThickness="1">
+                    <DockPanel Margin="30,20,30,30">
+                        <Label
+                            Margin="0,0,0,20"
+                            Padding="0"
+                            Content="묻고 답하기"
+                            DockPanel.Dock="Top"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="#5BB4AA" />
+                        <Border
+                            BorderBrush="#5BB4AA"
+                            BorderThickness="0,0,0,2"
+                            CornerRadius="0"
+                            DockPanel.Dock="Top" />
+                        <Border
+                            MinHeight="490"
+                            Margin="0,15,0,15"
+                            BorderBrush="#eeeeee"
+                            BorderThickness="1"
+                            DockPanel.Dock="Top">
+                            <ScrollViewer
+                                MaxHeight="490"
+                                Padding="25,20"
+                                VerticalScrollBarVisibility="Auto">
+                                <StackPanel x:Name="sPanChat">
+                                    <StackPanel Margin="0,0,0,30">
+                                        <Label Margin="0,0,0,10" Content="홍길동" />
+                                        <DockPanel>
+                                            <Border
+                                                Background="#F4F6F6"
+                                                BorderThickness="0"
+                                                CornerRadius="0 10 10 10">
+                                                <TextBlock Margin="15,10,15,10" Text="안녕하세요." />
+                                            </Border>
+                                            <TextBlock
+                                                Margin="10,0,0,0"
+                                                VerticalAlignment="Bottom"
+                                                FontSize="11"
+                                                Foreground="#B6B8B8"
+                                                Text="2020/12/24 09:56:44" />
+                                        </DockPanel>
+                                    </StackPanel>
+
+                                    <StackPanel Margin="0,0,0,30" HorizontalAlignment="Right">
+                                        <Label
+                                            Margin="0,0,0,10"
+                                            HorizontalAlignment="Right"
+                                            Content="관리자" />
+                                        <DockPanel>
+                                            <TextBlock
+                                                Margin="0,0,10,0"
+                                                VerticalAlignment="Bottom"
+                                                FontSize="11"
+                                                Foreground="#B6B8B8"
+                                                Text="2020/12/24 09:56:44" />
+                                            <Border
+                                                Background="#8D9F9D"
+                                                BorderThickness="0"
+                                                CornerRadius="10 0 10 10">
+                                                <TextBlock
+                                                    Margin="15,10,15,10"
+                                                    Foreground="White"
+                                                    Text="안녕하세요. 홍길동님&#10;답변입니다." />
+                                            </Border>
+
+                                        </DockPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </ScrollViewer>
+                        </Border>
+
+
+
+                        <DockPanel>
+                            <TextBox
+                                x:Name="txtAnswer"
+                                Style="{StaticResource waterMark_border2}"
+                                Text="안녕하세요." />
+                            <DockPanel Width="74">
+                                <Button
+                                    Click="btnFile_Click"
+                                    DockPanel.Dock="Top"
+                                    Style="{StaticResource btnPhoto}" />
+                                <Button
+                                    Click="btnSend_Click"
+                                    Content="등록"
+                                    Style="{StaticResource btnGreenRectRound}" />
+                            </DockPanel>
+                        </DockPanel>
+                    </DockPanel>
+                </Border>
+
+
+
+
+
+                <GroupBox
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="0,0,0,0"
+                    BorderBrush="Yellow"
+                    DockPanel.Dock="Top"
+                    Header="묻고 답하기"
+                    Visibility="Collapsed">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="100" />
+                        </Grid.RowDefinitions>
+                        <Border
+                            Padding="0"
+                            BorderBrush="Gray"
+                            BorderThickness="1">
+                            <ScrollViewer
+                                x:Name="ChatView"
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Height="Auto"
+                                Margin="0"
+                                CanContentScroll="True"
+                                HorizontalScrollBarVisibility="Auto"
+                                VerticalScrollBarVisibility="Auto">
+                                <StackPanel
+                                    x:Name="spChat"
+                                    Width="470"
+                                    Height="Auto"
+                                    Margin="10,10,0,10"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    OverridesDefaultStyle="False">
+                                    <DockPanel
+                                        Width="Auto"
+                                        Margin="12,0"
+                                        HorizontalAlignment="Left">
+                                        <Label Content="홍길동" />
+                                        <Label Content="2020-07-21 17:05:30" Foreground="Blue" />
+                                    </DockPanel>
+                                    <Border
+                                        x:Name="bdQuest"
+                                        Width="Auto"
+                                        Margin="10,0"
+                                        Padding="10"
+                                        HorizontalAlignment="Left"
+                                        Background="#cbefff"
+                                        BorderBrush="#cbefff"
+                                        BorderThickness="1"
+                                        CornerRadius="10">
+                                        <TextBlock
+                                            x:Name="txtQuest"
+                                            HorizontalAlignment="Left"
+                                            Text="안녕하세요~ 뭐좀 문의 드려도 되나요?" />
+                                    </Border>
+                                    <Border
+                                        x:Name="bdQuestImg"
+                                        Width="Auto"
+                                        Margin="10,10"
+                                        Padding="10"
+                                        HorizontalAlignment="Left"
+                                        Background="#cbefff"
+                                        BorderBrush="#cbefff"
+                                        BorderThickness="1"
+                                        CornerRadius="10">
+                                        <Image
+                                            x:Name="imgQuestImg"
+                                            Width="100"
+                                            Height="Auto"
+                                            Margin="0,0,0,0"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Top" />
+                                    </Border>
+                                    <DockPanel
+                                        Width="Auto"
+                                        Margin="12,0"
+                                        HorizontalAlignment="Right">
+                                        <Label Content="2020-07-21 17:05:30" Foreground="Blue" />
+                                        <Label Content="관리자" />
+                                    </DockPanel>
+                                    <Border
+                                        Width="Auto"
+                                        Margin="10,0"
+                                        Padding="10"
+                                        HorizontalAlignment="Right"
+                                        Background="#FFEDEFF0"
+                                        BorderBrush="#FFEDEFF0"
+                                        BorderThickness="1"
+                                        CornerRadius="10">
+                                        <TextBlock HorizontalAlignment="Left" Text="네~ 말씀하세요~" />
+                                    </Border>
+                                </StackPanel>
+                            </ScrollViewer>
+                        </Border>
+                        <StackPanel Grid.Row="1" Grid.Column="0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="420" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="45" />
+                                    <RowDefinition Height="55" />
+                                </Grid.RowDefinitions>
+                                <DockPanel
+                                    Grid.Row="0"
+                                    Grid.RowSpan="2"
+                                    Grid.Column="0"
+                                    Height="100"
+                                    Margin="0,5,0,0"
+                                    LastChildFill="True">
+                                    <Border
+                                        x:Name="bdImg"
+                                        Width="90"
+                                        Height="90"
+                                        Margin="0,0,5,0"
+                                        Padding="3"
+                                        VerticalAlignment="Top"
+                                        BorderBrush="Gray"
+                                        BorderThickness="1"
+                                        DockPanel.Dock="Left">
+                                        <Image
+                                            x:Name="imgSend"
+                                            Width="84"
+                                            Height="84"
+                                            Margin="0,0,0,0"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Top"
+                                            Stretch="Fill" />
+                                    </Border>
+                                    <TextBox
+                                        x:Name="txtContent"
+                                        Width="320"
+                                        Height="90"
+                                        Margin="0,0,0,0"
+                                        Padding="3"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        VerticalContentAlignment="Top"
+                                        AcceptsReturn="False"
+                                        BorderBrush="Gray "
+                                        BorderThickness="1"
+                                        DockPanel.Dock="Left"
+                                        KeyDown="txtContent_KeyDown"
+                                        KeyUp="txtContent_KeyUp"
+                                        Text=""
+                                        TextWrapping="Wrap"
+                                        VerticalScrollBarVisibility="Auto" />
+                                </DockPanel>
+                                <Button
+                                    x:Name="btnFile"
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Height="33"
+                                    Margin="5,5,0,6"
+                                    VerticalAlignment="Top"
+                                    Background="#4c9def"
+                                    BorderBrush="#4c9def"
+                                    Click="btnFile_Click"
+                                    Cursor="Hand">
+                                    <Grid Width="50">
+                                        <materialDesign:PackIcon VerticalAlignment="Center" Kind="Image" />
+                                        <TextBlock
+                                            Margin="15,0,0,0"
+                                            HorizontalAlignment="Center"
+                                            Text="사진" />
+                                    </Grid>
+                                </Button>
+                                <Button
+                                    x:Name="btnSend"
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Height="48"
+                                    Margin="5,0,0,0"
+                                    VerticalAlignment="Top"
+                                    Background="#ff8603"
+                                    BorderBrush="#ff8603"
+                                    Click="btnSend_Click"
+                                    Cursor="Hand">
+                                    <Grid Width="50">
+                                        <materialDesign:PackIcon VerticalAlignment="Center" Kind="ContentSave" />
+                                        <TextBlock
+                                            Margin="15,0,0,0"
+                                            HorizontalAlignment="Center"
+                                            Text="등록" />
+                                    </Grid>
+                                </Button>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+        </Grid>
+    </DockPanel>
+</UserControl>

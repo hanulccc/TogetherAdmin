@@ -1,0 +1,44 @@
+﻿<UserControl
+    x:Class="SangAdmin.Matching.ViewMatching"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SangAdmin.Matching"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="Transparent"
+    mc:Ignorable="d">
+    <DockPanel>
+        <DockPanel
+            x:Name="dpanTabParent"
+            Height="50"
+            Background="White"
+            DockPanel.Dock="Top"
+            Tag="contentMLocation">
+            <Button
+                x:Name="btnContentMLocation"
+                Margin="20,0,0,0"
+                Click="btnChangePage_Click"
+                Content="사용자 위치 현황"
+                Style="{StaticResource ChoiceTab}"
+                Tag="choice" />
+            <Button
+                x:Name="btnContentMPickup"
+                Margin="45,0,45,0"
+                Click="btnChangePage_Click"
+                Content="픽업 매칭 현황"
+                Style="{StaticResource UnChoiceTab}"
+                Tag="unchoice" />
+            <Button
+                x:Name="btnContentMTaxi"
+                HorizontalAlignment="Left"
+                Click="btnChangePage_Click"
+                Content="택시 동승 현황"
+                Style="{StaticResource UnChoiceTab}"
+                Tag="unchoice" />
+        </DockPanel>
+        <ContentControl
+            x:Name="contentControl"
+            Margin="30"
+            Content="{Binding}" />
+    </DockPanel>
+</UserControl>

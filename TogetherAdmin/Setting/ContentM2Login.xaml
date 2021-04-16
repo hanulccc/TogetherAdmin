@@ -1,0 +1,114 @@
+﻿<UserControl
+    x:Class="SangAdmin.Setting.ContentM2Login"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SangAdmin.Setting"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="1000"
+    d:DesignWidth="1000"
+    mc:Ignorable="d">
+    <DockPanel>
+        <Border
+            Height="75"
+            Padding="19"
+            DockPanel.Dock="Top">
+            <DockPanel>
+                <Label
+                    Margin="0,0,10,0"
+                    Content="조회기간"
+                    Style="{StaticResource lbBold}" />
+                <DatePicker
+                    x:Name="txtFrDate"
+                    Width="120"
+                    SelectedDateChanged="query_SelectionChanged" />
+                <Label
+                    Width="20"
+                    HorizontalContentAlignment="Center"
+                    Content="-"
+                    FontSize="15" />
+                <DatePicker
+                    x:Name="txtToDate"
+                    Width="120"
+                    Margin="0,0,20,0"
+                    SelectedDateChanged="query_SelectionChanged" />
+                <Label
+                    Margin="0,0,10,0"
+                    Content="사용자명"
+                    Style="{StaticResource lbBold}" />
+                <Border HorizontalAlignment="Left" Style="{StaticResource bdSearch}">
+                    <DockPanel>
+                        <TextBox
+                            x:Name="txtSrch"
+                            Width="190"
+                            KeyDown="txtSrch_KeyDown"
+                            Style="{StaticResource waterMark}"
+                            Tag="검색어 입력" />
+                        <Button
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Click="btnSearch_Click">
+                            <Button.Content>
+                                <Image Width="20" Source="/SangAdmin;component/Resources/SearchIcon.png" />
+                            </Button.Content>
+                        </Button>
+                    </DockPanel>
+                </Border>
+            </DockPanel>
+        </Border>
+        <DockPanel Margin="0,5,0,0" DockPanel.Dock="Top">
+            <Label
+                Height="55"
+                Margin="0,0,30,0"
+                Content="로그인내역"
+                FontSize="15"
+                FontWeight="Bold"
+                Foreground="#5E6262" />
+            <DockPanel HorizontalAlignment="Right">
+                <!--<Button
+                    Width="84"
+                    Height="35"
+                    VerticalAlignment="Center"
+                    Background="#5BB4AA"
+                    BorderThickness="0"
+                    Click="btnAddMng_Click"
+                    Content="신규등록"
+                    Foreground="White" />-->
+            </DockPanel>
+
+        </DockPanel>
+        <Grid>
+            <DataGrid
+                x:Name="ctlGrid"
+                CanUserReorderColumns="True"
+                CanUserResizeRows="False"
+                HorizontalScrollBarVisibility="Auto"
+                IsReadOnly="True"
+                RowHeaderWidth="30"
+                UseLayoutRounding="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        Width="*"
+                        MinWidth="100"
+                        Binding="{Binding Path=admin_id}"
+                        Header="아이디" />
+                    <DataGridTextColumn
+                        Width="*"
+                        MinWidth="80"
+                        Binding="{Binding Path=admin_name}"
+                        Header="사용자 명" />
+                    <DataGridTextColumn
+                        Width="*"
+                        MinWidth="115"
+                        Binding="{Binding Path=admin_power}"
+                        Header="권한" />
+                    <DataGridTextColumn
+                        Width="*"
+                        MinWidth="85"
+                        Binding="{Binding Path=admin_login_dt}"
+                        Header="로그인 날짜" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </DockPanel>
+</UserControl>

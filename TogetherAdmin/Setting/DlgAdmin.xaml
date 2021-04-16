@@ -1,0 +1,96 @@
+﻿<Window
+    x:Class="SangAdmin.Setting.DlgAdmin"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SangAdmin.Setting"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="DlgAdmin"
+    Width="400"
+    Height="475"
+    AllowsTransparency="True"
+    Background="Transparent"
+    BorderBrush="Transparent"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Border
+        x:Name="bdMain"
+        BorderBrush="#EEEEEE"
+        BorderThickness="1">
+        <DockPanel Margin="30">
+            <Label
+                Margin="0,0,0,25"
+                Content="운영진 상세"
+                DockPanel.Dock="Top"
+                FontSize="15"
+                FontWeight="Bold"
+                Foreground="#5BB4AA" />
+            <Border
+                BorderBrush="#5BB4AA"
+                BorderThickness="0,0,0,2"
+                CornerRadius="0"
+                DockPanel.Dock="Top" />
+
+            <DockPanel
+                Height="35"
+                Margin="0,30,0,0"
+                DockPanel.Dock="Top">
+                <Label Width="130" Content="아이디" />
+                <TextBox
+                    x:Name="txtId"
+                    Width="210"
+                    Height="35"
+                    HorizontalAlignment="Left" />
+            </DockPanel>
+            <DockPanel
+                Height="35"
+                Margin="0,30,0,0"
+                DockPanel.Dock="Top">
+                <Label Width="130" Content="비밀번호" />
+                <PasswordBox
+                    x:Name="pwd"
+                    DockPanel.Dock="Top"
+                    Style="{StaticResource waterMark_password}" />
+            </DockPanel>
+            <DockPanel
+                Height="35"
+                Margin="0,30,0,0"
+                DockPanel.Dock="Top">
+                <Label Width="130" Content="이름" />
+                <TextBox
+                    x:Name="txtName"
+                    Width="210"
+                    Height="35"
+                    HorizontalAlignment="Left" />
+            </DockPanel>
+            <DockPanel
+                Height="35"
+                Margin="0,30,0,0"
+                DockPanel.Dock="Top">
+                <Label Width="130" Content="권한" />
+                <ComboBox x:Name="cboPower" Width="210">
+                    <ComboBoxItem Content="일반" IsSelected="True" />
+                    <ComboBoxItem Content="관리자" />
+                </ComboBox>
+            </DockPanel>
+
+
+
+
+            <DockPanel
+                Height="40"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom">
+                <Button
+                    Click="btnClose_Click"
+                    Content="취소"
+                    Style="{StaticResource btnRoundBorder}" />
+                <Button
+                    Click="btnSave_Click"
+                    Content="저장"
+                    Style="{StaticResource btnGreenRound}" />
+            </DockPanel>
+        </DockPanel>
+    </Border>
+</Window>

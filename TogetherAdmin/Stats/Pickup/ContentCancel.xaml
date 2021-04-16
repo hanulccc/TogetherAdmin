@@ -1,0 +1,70 @@
+﻿<UserControl
+    x:Class="SangAdmin.Stats.Pickup.ContentCancel"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SangAdmin.Setting"
+    xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="1000"
+    d:DesignWidth="1000"
+    mc:Ignorable="d">
+    <DockPanel>
+        <Border
+            Height="75"
+            Padding="19"
+            DockPanel.Dock="Top">
+            <DockPanel>
+                <Label
+                    Margin="0,0,10,0"
+                    Content="조회기간"
+                    Style="{StaticResource lbBold}" />
+                <DatePicker
+                    x:Name="txtFrDate"
+                    Width="120"
+                    SelectedDateChanged="txtDate_SelectedDateChanged" />
+                <Label
+                    Width="20"
+                    HorizontalContentAlignment="Center"
+                    Content="-"
+                    FontSize="15" />
+                <DatePicker
+                    x:Name="txtToDate"
+                    Width="120"
+                    Margin="0,0,20,0"
+                    HorizontalAlignment="Left" />
+            </DockPanel>
+        </Border>
+
+        <DockPanel Margin="0,5,0,0" DockPanel.Dock="Top">
+            <Label
+                Height="55"
+                Margin="0,0,30,0"
+                Content="취소 사유별 통계"
+                FontSize="15"
+                FontWeight="Bold"
+                Foreground="#5E6262" />
+        </DockPanel>
+
+        <Border Margin="0,0,0,0" DockPanel.Dock="Top">
+            <lvc:CartesianChart
+                x:Name="chart_"
+                Margin="20"
+                DockPanel.Dock="Top"
+                LegendLocation="Bottom">
+                <lvc:CartesianChart.Series>
+                    <lvc:ColumnSeries
+                        Title="취소건수"
+                        Fill="#E98888"
+                        Values="{Binding cnt_value}" />
+                </lvc:CartesianChart.Series>
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="" Labels="{Binding label}" />
+                </lvc:CartesianChart.AxisX>
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="" LabelFormatter="{Binding Formatter}" />
+                </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart>
+        </Border>
+    </DockPanel>
+</UserControl>

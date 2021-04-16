@@ -1,0 +1,276 @@
+﻿<UserControl
+    x:Class="SangAdmin.User.ContentShelperList"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SangAdmin.User"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="1500"
+    mc:Ignorable="d">
+    <DockPanel>
+        <Border
+            Height="75"
+            Padding="19"
+            DockPanel.Dock="Top">
+            <DockPanel>
+                <Label
+                    Margin="0,0,10,0"
+                    Content="가입일"
+                    Style="{StaticResource lbBold}" />
+                <DatePicker
+                    x:Name="txtFrDate"
+                    Width="120"
+                    SelectedDateChanged="query_SelectionChanged" />
+                <Label
+                    Width="20"
+                    HorizontalContentAlignment="Center"
+                    Content="-"
+                    FontSize="15" />
+                <DatePicker
+                    x:Name="txtToDate"
+                    Width="120"
+                    SelectedDateChanged="query_SelectionChanged" />
+                <Label
+                    Margin="30,0,10,0"
+                    Content="승인여부"
+                    Style="{StaticResource lbBold}" />
+                <ComboBox
+                    x:Name="cboUserType"
+                    Width="110"
+                    SelectionChanged="query_SelectionChanged" />
+                <Label
+                    Margin="30,0,10,0"
+                    Content="탈퇴여부"
+                    FontWeight="Bold"
+                    Style="{StaticResource lbBold}" />
+                <ComboBox
+                    x:Name="cboLeaveYn"
+                    Width="110"
+                    Margin="0,0,30,0"
+                    SelectionChanged="query_SelectionChanged" />
+                <Label Content="검색" Style="{StaticResource lbBold}" />
+                <ComboBox x:Name="cboSearch" Margin="10,0,10,0">
+                    <ComboBoxItem Content="이름" IsSelected="True" />
+                    <ComboBoxItem Content="핸드폰" />
+                </ComboBox>
+                <Border Style="{StaticResource bdSearch}">
+                    <DockPanel>
+                        <TextBox
+                            x:Name="txtSrch"
+                            Width="190"
+                            KeyDown="txtSrch_KeyDown"
+                            Style="{StaticResource waterMark}"
+                            Tag="검색어 입력" />
+                        <Button
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Click="btnQuery_Click">
+                            <Button.Content>
+                                <Image Width="20" Source="/SangAdmin;component/Resources/SearchIcon.png" />
+                            </Button.Content>
+                        </Button>
+                    </DockPanel>
+                </Border>
+                <Button
+                    Width="35"
+                    Height="35"
+                    Padding="5,5,4,3"
+                    Click="btnExcelDown_Click"
+                    DockPanel.Dock="Right"
+                    Style="{StaticResource btnBorder}">
+                    <Button.Content>
+                        <Image Source="/SangAdmin;component/Resources/ExcelDown.png" />
+                    </Button.Content>
+                </Button>
+                <Button
+                    Width="104"
+                    Margin="0,0,10,0"
+                    HorizontalAlignment="Right"
+                    Click="btnAutoSelect_Click"
+                    Foreground="#5BB4AA"
+                    Style="{StaticResource btnBorder}">
+                    <Grid Width="80">
+                        <materialDesign:PackIcon VerticalAlignment="Center" Kind="Cached" />
+                        <TextBlock
+                            x:Name="txtAutoSelect"
+                            Margin="20,0,0,0"
+                            HorizontalAlignment="Center"
+                            Text="자동 조회" />
+                    </Grid>
+                </Button>
+            </DockPanel>
+        </Border>
+        <DockPanel Margin="0,5,0,0" DockPanel.Dock="Top">
+            <Label
+                Height="55"
+                Margin="0,0,30,0"
+                Content="쉘퍼 가입 목록"
+                FontSize="15"
+                FontWeight="Bold"
+                Foreground="#5E6262" />
+        </DockPanel>
+        <Grid>
+            <DataGrid
+                x:Name="ctlGrid"
+                CanUserReorderColumns="True"
+                CanUserResizeRows="False"
+                HorizontalScrollBarVisibility="Auto"
+                IsReadOnly="True"
+                MouseDoubleClick="ctlGrid_MouseDoubleClick"
+                RowHeaderWidth="30"
+                UseLayoutRounding="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="80"
+                        Binding="{Binding Path=user_status}"
+                        Header="승인여부" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="140"
+                        Binding="{Binding Path=user_id}"
+                        Header="회원ID" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="100"
+                        Binding="{Binding Path=user_name}"
+                        Header="성명" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="100"
+                        Binding="{Binding Path=user_ph}"
+                        Header="핸드폰" />
+                    <DataGridTemplateColumn
+                        Width="80"
+                        MinWidth="80"
+                        Header="프로필사진"
+                        IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image
+                                    Margin="2"
+                                    Cursor="Hand"
+                                    MouseLeftButtonDown="Image_MouseLeftButtonDown"
+                                    Source="{Binding Path=profile_img}"
+                                    Stretch="Fill" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn
+                        Width="80"
+                        MinWidth="80"
+                        Header="면허증사진"
+                        IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image
+                                    Margin="2"
+                                    Cursor="Hand"
+                                    MouseLeftButtonDown="Image_MouseLeftButtonDown"
+                                    Source="{Binding Path=license_img}"
+                                    Stretch="Fill" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="100"
+                        Binding="{Binding Path=license_num}"
+                        Header="운전면허번호" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="130"
+                        Binding="{Binding Path=license_dt}"
+                        Header="운전면허만료" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="80"
+                        Binding="{Binding Path=profile_yn}"
+                        Header="프로필심사" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="80"
+                        Binding="{Binding Path=license_yn}"
+                        Header="면허증심사" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="140"
+                        Binding="{Binding Path=reg_date, StringFormat={}{0:yyyy/MM/dd HH:mm:ss}}"
+                        Header="가입일" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="140"
+                        Binding="{Binding Path=ok_date, StringFormat={}{0:yyyy/MM/dd HH:mm:ss}}"
+                        Header="승인일" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="140"
+                        Binding="{Binding Path=auto_approval}"
+                        Header="자동승인여부" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="140"
+                        Binding="{Binding Path=approval_memo}"
+                        Header="승인거절 사유" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="100"
+                        Binding="{Binding Path=leave_yn}"
+                        Header="탈퇴여부" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="140"
+                        Binding="{Binding Path=leave_date, StringFormat={}{0:yyyy/MM/dd HH:mm:ss}}"
+                        Header="탈퇴일" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="140"
+                        Binding="{Binding Path=leave_memo, StringFormat={}{0:yyyy/MM/dd HH:mm:ss}}"
+                        Header="탈퇴사유" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="80"
+                        Binding="{Binding Path=car_num}"
+                        Header="차량번호" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="120"
+                        Binding="{Binding Path=bohum_no}"
+                        Header="보험번호" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="80"
+                        Binding="{Binding Path=bohum_frdate}"
+                        Header="보험시작일" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="80"
+                        Binding="{Binding Path=bohum_todate}"
+                        Header="보험종료일" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="80"
+                        Binding="{Binding Path=car_brand}"
+                        Header="제조사" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="80"
+                        Binding="{Binding Path=car_model}"
+                        Header="모델명" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="70"
+                        Binding="{Binding Path=car_max}"
+                        Header="탑승인원" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="60"
+                        Binding="{Binding Path=car_owner}"
+                        Header="차량명의" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </DockPanel>
+</UserControl>

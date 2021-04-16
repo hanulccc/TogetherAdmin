@@ -1,0 +1,351 @@
+﻿<UserControl
+    x:Class="SangAdmin.User.ContentVirtualNo"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SangAdmin.User"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="1300"
+    mc:Ignorable="d">
+    <DockPanel>
+
+        <Border
+            Width="288"
+            Height="35"
+            Margin="0,7,0,37"
+            HorizontalAlignment="Center"
+            Background="#F7F8F8"
+            BorderThickness="1"
+            CornerRadius="5"
+            DockPanel.Dock="Top">
+            <Grid>
+                <DockPanel>
+                    <Button
+                        Width="131"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Click="btnType_Click"
+                        Content="가상번호 현황"
+                        FontSize="14"
+                        Foreground="#5E6262" />
+                    <Button
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Click="btnType_Click"
+                        Content="가상번호 이용내역"
+                        FontSize="14"
+                        Foreground="#5E6262" />
+                </DockPanel>
+                <DockPanel>
+                    <Label
+                        x:Name="lbVirtualNo"
+                        Width="131"
+                        HorizontalContentAlignment="Center"
+                        Background="#7C8988"
+                        BorderThickness="0"
+                        Content="가상번호 현황"
+                        FontSize="14"
+                        FontWeight="Bold"
+                        Foreground="White" />
+                    <Label
+                        x:Name="lbVirtualNoList"
+                        HorizontalContentAlignment="Center"
+                        Background="#7C8988"
+                        BorderThickness="0"
+                        Content="가상번호 이용내역"
+                        FontSize="14"
+                        FontWeight="Bold"
+                        Foreground="White"
+                        Visibility="Hidden" />
+                </DockPanel>
+            </Grid>
+        </Border>
+
+        <Border
+            Height="75"
+            Padding="19"
+            DockPanel.Dock="Top">
+            <DockPanel>
+                <DockPanel
+                    x:Name="dpanSearch"
+                    Margin="0,0,30,0"
+                    Visibility="Collapsed">
+                    <Label
+                        Margin="0,0,10,0"
+                        Content="통화일"
+                        Style="{StaticResource lbBold}" />
+                    <DatePicker
+                        x:Name="txtFrDate"
+                        Width="120"
+                        SelectedDateChanged="query_SelectionChanged" />
+                    <Label
+                        Width="20"
+                        HorizontalContentAlignment="Center"
+                        Content="-"
+                        FontSize="15" />
+                    <DatePicker
+                        x:Name="txtToDate"
+                        Width="120"
+                        SelectedDateChanged="query_SelectionChanged" />
+                    <Label
+                        Margin="30,0,0,0"
+                        Content="통신사"
+                        Style="{StaticResource lbBold}" />
+                    <ComboBox
+                        x:Name="cboCarrier"
+                        Width="110"
+                        Margin="10,0,30,0">
+                        <ComboBoxItem Content="KT" IsSelected="True" />
+                    </ComboBox>
+                    <Border
+                        Width="180"
+                        Margin="10,0,0,0"
+                        HorizontalAlignment="Left"
+                        Background="#F7F8F8"
+                        BorderThickness="0"
+                        CornerRadius="5">
+                        <Grid>
+                            <DockPanel Visibility="Visible">
+                                <Button
+                                    Click="btnType2_Click"
+                                    Content="전체"
+                                    Style="{StaticResource btnType}" />
+                                <Button
+                                    Width="70"
+                                    Click="btnType2_Click"
+                                    Content="드라이버"
+                                    Style="{StaticResource btnType}" />
+                                <Button
+                                    Click="btnType2_Click"
+                                    Content="쉘퍼"
+                                    Style="{StaticResource btnType}" />
+                            </DockPanel>
+                            <DockPanel>
+                                <Label
+                                    x:Name="lbTypeAll"
+                                    Content="전체"
+                                    Style="{StaticResource lbType}" />
+                                <Label
+                                    x:Name="lbTypeDriver"
+                                    Width="70"
+                                    Content="드라이버"
+                                    Style="{StaticResource lbType}"
+                                    Visibility="Hidden" />
+                                <Label
+                                    x:Name="lbTypeShelper"
+                                    Content="쉘퍼"
+                                    Style="{StaticResource lbType}"
+                                    Visibility="Hidden" />
+
+                            </DockPanel>
+                        </Grid>
+                    </Border>
+                </DockPanel>
+                <DockPanel Visibility="Visible">
+                    <Label
+                        x:Name="lbSearch"
+                        Margin="0,0,10,0"
+                        Content="가상번호"
+                        Style="{StaticResource lbBold}" />
+                    <ComboBox
+                        x:Name="cboSearch"
+                        Margin="0,0,10,0"
+                        Visibility="Collapsed" />
+                    <Border Style="{StaticResource bdSearch}">
+                        <DockPanel>
+                            <TextBox
+                                x:Name="txtSrch"
+                                Width="190"
+                                KeyDown="txtSrch_KeyDown"
+                                Style="{StaticResource waterMark}"
+                                Tag="가상번호 입력" />
+                            <Button
+                                Background="Transparent"
+                                BorderBrush="Transparent"
+                                Click="btnQuery_Click">
+                                <Button.Content>
+                                    <Image Width="20" Source="/SangAdmin;component/Resources/SearchIcon.png" />
+                                </Button.Content>
+                            </Button>
+                        </DockPanel>
+                    </Border>
+                    <Button
+                        Width="35"
+                        Height="35"
+                        Padding="5,5,4,3"
+                        HorizontalAlignment="Right"
+                        Click="btnExcelDown_Click"
+                        Style="{StaticResource btnBorder}">
+                        <Button.Content>
+                            <Image Source="/SangAdmin;component/Resources/ExcelDown.png" />
+                        </Button.Content>
+                    </Button>
+                </DockPanel>
+            </DockPanel>
+
+        </Border>
+        <DockPanel Margin="0,5,0,0" DockPanel.Dock="Top">
+            <Label
+                x:Name="lbTitle"
+                Height="55"
+                Margin="0,0,30,0"
+                Content="가상번호 현황"
+                FontSize="15"
+                FontWeight="Bold"
+                Foreground="#5E6262" />
+        </DockPanel>
+        <Grid>
+            <DataGrid
+                x:Name="ctlGrid"
+                CanUserReorderColumns="True"
+                CanUserResizeRows="False"
+                HorizontalScrollBarVisibility="Auto"
+                IsReadOnly="True"
+                RowHeaderWidth="30"
+                UseLayoutRounding="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="120"
+                        Binding="{Binding Path=user_type}"
+                        Header="사용자 구분" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="150"
+                        Binding="{Binding Path=vr_num}"
+                        Header="가상번호" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="150"
+                        Binding="{Binding Path=user_ph}"
+                        Header="핸드폰번호" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="200"
+                        Binding="{Binding Path=user_id}"
+                        Header="회원ID" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="130"
+                        Binding="{Binding Path=user_name}"
+                        Header="회원명" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="70"
+                        Binding="{Binding Path=leave_yn}"
+                        Header="탈퇴여부" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="200"
+                        Binding="{Binding Path=leave_date}"
+                        Header="탈퇴일자" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="200"
+                        Binding="{Binding Path=conn_date}"
+                        Header="할당일자" />
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button
+                                    x:Name="btnVirtNo"
+                                    Width="80"
+                                    Height="35"
+                                    MinWidth="80"
+                                    Margin="2"
+                                    Padding="0"
+                                    BorderBrush="Red"
+                                    Click="btnVirtNo_Click"
+                                    Content="{Binding button_name}"
+                                    Cursor="Hand"
+                                    FontSize="13"
+                                    FontWeight="Bold"
+                                    Foreground="Red">
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Background" Value="White" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=button_name}" Value="할당">
+                                                    <Setter Property="Visibility" Value="Hidden" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <DataGrid
+                x:Name="ctlGridList"
+                CanUserReorderColumns="True"
+                CanUserResizeRows="False"
+                HorizontalScrollBarVisibility="Auto"
+                IsReadOnly="True"
+                RowHeaderWidth="30"
+                UseLayoutRounding="False"
+                Visibility="Collapsed">
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="100"
+                        Binding="{Binding Path=user_type}"
+                        Header="유저구분" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="100"
+                        Binding="{Binding Path=user_id}"
+                        Header="유저 아이디" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="100"
+                        Binding="{Binding Path=user_name}"
+                        Header="유저 이름" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="100"
+                        Binding="{Binding Path=user_ph}"
+                        Header="유저 연락처" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="100"
+                        Binding="{Binding Path=vrNum}"
+                        Header="안심번호" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="150"
+                        Binding="{Binding Path=inTime}"
+                        Header="호인입시간" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="120"
+                        Binding="{Binding Path=senderNum}"
+                        Header="발신번호" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="100"
+                        Binding="{Binding Path=receiverNum}"
+                        Header="착신번호" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="150"
+                        Binding="{Binding Path=startTime}"
+                        Header="통화시도시간" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="150"
+                        Binding="{Binding Path=endTime}"
+                        Header="통화종료시간" />
+                    <DataGridTextColumn
+                        Width="Auto"
+                        MinWidth="140"
+                        Binding="{Binding Path=result}"
+                        Header="호처리결과" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </DockPanel>
+</UserControl>

@@ -1,0 +1,123 @@
+﻿<UserControl
+    x:Class="SangAdmin.Stats.User.ContentArea"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SangAdmin.Setting"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="1000"
+    d:DesignWidth="1000"
+    mc:Ignorable="d">
+    <DockPanel>
+        <Border
+            Height="75"
+            Padding="19"
+            DockPanel.Dock="Top">
+            <DockPanel>
+                <Label
+                    Margin="0,0,10,0"
+                    Content="조회기간"
+                    Style="{StaticResource lbBold}" />
+                <DatePicker
+                    x:Name="txtFrDate"
+                    Width="120"
+                    SelectedDateChanged="txtDate_SelectedDateChanged" />
+                <Label
+                    Width="20"
+                    HorizontalContentAlignment="Center"
+                    Content="-"
+                    FontSize="15" />
+                <DatePicker
+                    x:Name="txtToDate"
+                    Width="120"
+                    Margin="0,0,20,0"
+                    SelectedDateChanged="txtDate_SelectedDateChanged" />
+                <Label
+                    Margin="30,0,0,0"
+                    Content="지역별"
+                    Style="{StaticResource lbBold}" />
+                <Border Style="{StaticResource bdSearch}">
+                    <DockPanel>
+                        <TextBox
+                            x:Name="txtSrch"
+                            Width="190"
+                            Style="{StaticResource waterMark}"
+                            Tag="검색어 입력" />
+                        <Button
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Click="btnSrch_Click">
+                            <Button.Content>
+                                <Image Width="20" Source="/SangAdmin;component/Resources/SearchIcon.png" />
+                            </Button.Content>
+                        </Button>
+                    </DockPanel>
+                </Border>
+                <Button
+                    Width="35"
+                    Height="35"
+                    Padding="5,5,4,3"
+                    HorizontalAlignment="Right"
+                    Click="btnExcelSave_Click"
+                    Style="{StaticResource btnBorder}">
+                    <Button.Content>
+                        <Image Source="/SangAdmin;component/Resources/ExcelDown.png" />
+                    </Button.Content>
+                </Button>
+            </DockPanel>
+        </Border>
+        <DockPanel Margin="0,5,0,0" DockPanel.Dock="Top">
+            <Label
+                Height="55"
+                Margin="0,0,30,0"
+                Content="지역별 통계"
+                FontSize="15"
+                FontWeight="Bold"
+                Foreground="#5E6262" />
+        </DockPanel>
+
+        <Grid>
+            <DataGrid
+                x:Name="ctlGrid"
+                CanUserReorderColumns="True"
+                CanUserResizeRows="False"
+                HorizontalScrollBarVisibility="Auto"
+                IsReadOnly="True"
+                RowHeaderWidth="30"
+                UseLayoutRounding="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        Width="*"
+                        MinWidth="200"
+                        Binding="{Binding Path=stat_area}"
+                        Header="지역" />
+                    <DataGridTextColumn
+                        Width="*"
+                        MinWidth="200"
+                        Binding="{Binding Path=stat_dtot}"
+                        Header="총 드라이버 수" />
+                    <DataGridTextColumn
+                        Width="*"
+                        MinWidth="200"
+                        Binding="{Binding Path=stat_htot}"
+                        Header="총 쉘퍼 수" />
+                    <DataGridTextColumn
+                        Width="*"
+                        MinWidth="100"
+                        Binding="{Binding Path=stat_signup}"
+                        Header="신규 가입자 수" />
+                    <DataGridTextColumn
+                        Width="*"
+                        MinWidth="100"
+                        Binding="{Binding Path=stat_tot}"
+                        Header="총 가입자 수" />
+                    <DataGridTextColumn
+                        Width="*"
+                        MinWidth="100"
+                        Binding="{Binding Path=stat_del}"
+                        Header="총 탈퇴자 수" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </DockPanel>
+</UserControl>

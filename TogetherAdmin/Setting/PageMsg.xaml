@@ -1,0 +1,97 @@
+﻿<UserControl
+    x:Class="SangAdmin.Setting.PageMsg"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SangAdmin.Matching"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="Transparent"
+    mc:Ignorable="d">
+    <DockPanel>
+        <DockPanel Margin="0,5,0,0" DockPanel.Dock="Top">
+            <Border
+                Width="307.5"
+                Height="35"
+                Margin="10"
+                Background="Transparent"
+                BorderBrush="#EBECEC"
+                BorderThickness="1"
+                DockPanel.Dock="Top"
+                Visibility="Visible">
+                <DockPanel>
+                    <Grid>
+                        <DockPanel>
+                            <Button
+                                Width="102"
+                                Height="35"
+                                VerticalAlignment="Center"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Click="btnChangePage_Click"
+                                Content="발송내역"
+                                Foreground="#5E6262" />
+                            <Button
+                                Width="102"
+                                Height="35"
+                                VerticalAlignment="Center"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Click="btnChangePage_Click"
+                                Content="발송설정"
+                                Foreground="#5E6262"
+                                Tag="faq" />
+                            <Button
+                                Width="102"
+                                Height="35"
+                                VerticalAlignment="Center"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Click="btnChangePage_Click"
+                                Content="안내콜"
+                                Foreground="#5E6262"
+                                Tag="qna" />
+                        </DockPanel>
+                        <DockPanel>
+                            <Label
+                                x:Name="lbMsgList"
+                                Width="102"
+                                HorizontalContentAlignment="Center"
+                                Background="#7C8988"
+                                BorderThickness="0"
+                                Content="발송내역"
+                                FontSize="14"
+                                FontWeight="Bold"
+                                Foreground="White" />
+                            <Label
+                                x:Name="lbMsg"
+                                Width="102"
+                                HorizontalContentAlignment="Center"
+                                Background="#7C8988"
+                                BorderThickness="0"
+                                Content="발송설정"
+                                FontSize="14"
+                                FontWeight="Bold"
+                                Foreground="White"
+                                Visibility="Hidden" />
+                            <Label
+                                x:Name="lbNotiCall"
+                                Width="102"
+                                HorizontalContentAlignment="Center"
+                                Background="#7C8988"
+                                BorderThickness="0"
+                                Content="안내콜"
+                                FontSize="14"
+                                FontWeight="Bold"
+                                Foreground="White"
+                                Visibility="Hidden" />
+                        </DockPanel>
+                    </Grid>
+                </DockPanel>
+            </Border>
+        </DockPanel>
+        <ContentControl
+            x:Name="contentControl"
+            Margin="30,10,30,30"
+            Content="{Binding}" />
+    </DockPanel>
+</UserControl>

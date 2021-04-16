@@ -1,0 +1,535 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C4511DAA-CF13-43AC-B04A-DC7106262FC0}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>SangAdmin</RootNamespace>
+    <AssemblyName>SangAdmin</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logo_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Other\DlgAutoMsgSetting.xaml.cs" />
+    <Compile Include="Other\DlgFaq.xaml.cs" />
+    <Compile Include="Other\DlgMsgConditionSetting.xaml.cs">
+      <DependentUpon>DlgMsgConditionSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Other\DlgMsgPushSend.xaml.cs" />
+    <Compile Include="Other\DlgNotiCall.xaml.cs" />
+    <Compile Include="Other\DlgNotice.xaml.cs" />
+    <Compile Include="Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Setting\ContentM2List.xaml.cs" />
+    <Compile Include="Setting\ContentM2Login.xaml.cs" />
+    <Compile Include="Setting\ContentMMsg.xaml.cs" />
+    <Compile Include="Setting\ContentMMsgList.xaml.cs">
+      <DependentUpon>ContentMMsgList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Setting\ContentMNotiCall.xaml.cs" />
+    <Compile Include="Setting\ContentUFaq.xaml.cs" />
+    <Compile Include="Setting\ContentUNotice.xaml.cs" />
+    <Compile Include="Setting\ContentUQna.xaml.cs" />
+    <Compile Include="Setting\DlgAdmin.xaml.cs">
+      <DependentUpon>DlgAdmin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Setting\PageMng.xaml.cs" />
+    <Compile Include="Setting\PageMsg.xaml.cs" />
+    <Compile Include="Setting\PageUser.xaml.cs" />
+    <Compile Include="Setting\ViewSetting.xaml.cs" />
+    <Compile Include="Stats\Access\ContentDay.xaml.cs" />
+    <Compile Include="Stats\Access\ContentTime.xaml.cs" />
+    <Compile Include="Stats\PageAccess.xaml.cs" />
+    <Compile Include="Stats\PagePickup.xaml.cs" />
+    <Compile Include="Stats\PageTaxi.xaml.cs" />
+    <Compile Include="Stats\PageUser.xaml.cs" />
+    <Compile Include="Stats\Pickup\ContentArea.xaml.cs" />
+    <Compile Include="Stats\Pickup\ContentCancel.xaml.cs" />
+    <Compile Include="Stats\Pickup\ContentDay.xaml.cs" />
+    <Compile Include="Stats\Pickup\ContentFee.xaml.cs" />
+    <Compile Include="Stats\Pickup\ContentTime.xaml.cs" />
+    <Compile Include="Stats\User\ContentArea.xaml.cs" />
+    <Compile Include="Stats\User\ContentDay.xaml.cs" />
+    <Compile Include="Stats\ViewStats.xaml.cs" />
+    <Compile Include="User\ContentShelperList.xaml.cs">
+      <DependentUpon>ContentShelperList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User\ContentUserList.xaml.cs">
+      <DependentUpon>ContentUserList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User\ContentVirtualNo.xaml.cs">
+      <DependentUpon>ContentVirtualNo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User\DlgChangeList.xaml.cs">
+      <DependentUpon>DlgChangeList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User\DlgDriverSrvList.xaml.cs">
+      <DependentUpon>DlgDriverSrvList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User\DlgShelperSrvList.xaml.cs">
+      <DependentUpon>DlgShelperSrvList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User\DlgTestView.xaml.cs">
+      <DependentUpon>DlgTestView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User\DlgUserDetail.xaml.cs">
+      <DependentUpon>DlgUserDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User\ViewUser.xaml.cs">
+      <DependentUpon>ViewUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VirtualAccnt\ContentAccntList.xaml.cs">
+      <DependentUpon>ContentAccntList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VirtualAccnt\ContentDepositList.xaml.cs">
+      <DependentUpon>ContentDepositList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VirtualAccnt\ContentUserAccnt.xaml.cs">
+      <DependentUpon>ContentUserAccnt.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VirtualAccnt\DlgAccntInfo.xaml.cs">
+      <DependentUpon>DlgAccntInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VirtualAccnt\DlgUserAccTrans.xaml.cs">
+      <DependentUpon>DlgUserAccTrans.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VirtualAccnt\ViewVirtualAccnt.xaml.cs">
+      <DependentUpon>ViewVirtualAccnt.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Common\Style\ComboStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Common\Style\CommStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Common\BasePage.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Matching\ContentMLocation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Matching\ContentMPickup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Matching\ContentMTaxi.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Matching\ViewMatching.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Other\DlgAutoMsgSetting.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Other\DlgFaq.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Other\DlgMsgConditionSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Other\DlgMsgPushSend.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Other\DlgMsgSend.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Other\DlgNotiCall.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Other\DlgNotice.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Other\DlgReceiveUsers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Other\ViewMain.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Setting\ContentM2List.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Setting\ContentM2Login.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Setting\ContentMMsg.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Setting\ContentMMsgList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Setting\ContentMNotiCall.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Setting\ContentUFaq.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Setting\ContentUNotice.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Setting\ContentUQna.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Setting\DlgAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Setting\PageMng.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Setting\PageMsg.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Setting\PageUser.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Setting\ViewSetting.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Stats\Access\ContentDay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Stats\Access\ContentTime.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Stats\PageAccess.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Stats\PagePickup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Stats\PageTaxi.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Stats\PageUser.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Stats\Pickup\ContentArea.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Stats\Pickup\ContentCancel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Stats\Pickup\ContentDay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Stats\Pickup\ContentFee.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Stats\Pickup\ContentTime.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Stats\User\ContentArea.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Stats\User\ContentDay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Stats\ViewStats.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="User\ContentShelperList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User\ContentUserList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User\ContentVirtualNo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User\DlgChangeList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User\DlgDriverSrvList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User\DlgShelperSrvList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User\DlgTestView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User\DlgUserDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User\ViewUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VirtualAccnt\ContentAccntList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VirtualAccnt\ContentDepositList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VirtualAccnt\ContentUserAccnt.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VirtualAccnt\DlgAccntInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VirtualAccnt\DlgUserAccTrans.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VirtualAccnt\ViewVirtualAccnt.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Matching\ContentMLocation.xaml.cs">
+      <DependentUpon>ContentMLocation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Matching\ContentMPickup.xaml.cs">
+      <DependentUpon>ContentMPickup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Matching\ContentMTaxi.xaml.cs">
+      <DependentUpon>ContentMTaxi.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Matching\ViewMatching.xaml.cs">
+      <DependentUpon>ViewMatching.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Other\DlgMsgSend.xaml.cs">
+      <DependentUpon>DlgMsgSend.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Other\DlgReceiveUsers.xaml.cs">
+      <DependentUpon>DlgReceiveUsers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Other\ViewMain.xaml.cs">
+      <DependentUpon>ViewMain.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CefSharp.Common">
+      <Version>87.1.132</Version>
+    </PackageReference>
+    <PackageReference Include="CefSharp.Wpf">
+      <Version>87.1.132</Version>
+    </PackageReference>
+    <PackageReference Include="jQuery">
+      <Version>2.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="LiveCharts">
+      <Version>0.9.7</Version>
+    </PackageReference>
+    <PackageReference Include="LiveCharts.Wpf">
+      <Version>0.9.7</Version>
+    </PackageReference>
+    <PackageReference Include="MaterialDesign.dll">
+      <Version>1.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="MaterialDesignThemes">
+      <Version>3.1.3</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Office.Interop.Excel">
+      <Version>15.0.4795.1000</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="System.Net.Http">
+      <Version>4.3.4</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ExcelDown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\DatePicker.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\SearchIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Menu1_Choice.png" />
+    <Resource Include="Resources\Menu1_UnChoice.png" />
+    <Resource Include="Resources\Menu2_Choice.png" />
+    <Resource Include="Resources\Menu2_UnChoice.png" />
+    <Resource Include="Resources\Menu3_Choice.png" />
+    <Resource Include="Resources\Menu3_UnChoice.png" />
+    <Resource Include="Resources\Menu4_Choice.png" />
+    <Resource Include="Resources\Menu4_UnChoice.png" />
+    <Resource Include="Resources\Menu5_Choice.png" />
+    <Resource Include="Resources\Menu5_UnChoice.png" />
+    <Resource Include="Resources\Menu6_Choice.png" />
+    <Resource Include="Resources\Menu6_UnChoice.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\MenuClose.png" />
+    <Resource Include="Resources\MenuOpen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\SubMenuClose.png" />
+    <Resource Include="Resources\SubMenuOpen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\DatePicker_IsEnable.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\VirtualAccnt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\AdminMenu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Message.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\CatProfile.jpg" />
+    <Resource Include="Resources\DogProfile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Photo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="logo_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Camera.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

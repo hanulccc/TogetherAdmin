@@ -1,0 +1,164 @@
+﻿<Window
+    x:Class="SangAdmin.Other.DlgMsgSend"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SangAdmin.Other"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="DlgMsgSend"
+    Width="615"
+    Height="675"
+    AllowsTransparency="True"
+    Background="Transparent"
+    BorderBrush="Transparent"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Grid>
+        <Border
+            x:Name="bdMain"
+            BorderBrush="#EEEEEE"
+            BorderThickness="1">
+            <DockPanel Margin="30">
+                <Label
+                    Margin="0,0,0,25"
+                    Content="문자 발송"
+                    DockPanel.Dock="Top"
+                    FontSize="15"
+                    FontWeight="Bold"
+                    Foreground="#5BB4AA" />
+                <Border
+                    BorderBrush="#5BB4AA"
+                    BorderThickness="0,0,0,2"
+                    CornerRadius="0"
+                    DockPanel.Dock="Top" />
+                <DockPanel Margin="0,30,0,0" DockPanel.Dock="Top">
+                    <Label Width="130" Content="발신 번호" />
+                    <Border
+                        Width="210"
+                        Height="35"
+                        HorizontalAlignment="Left"
+                        Style="{StaticResource bdSearch}">
+                        <TextBox
+                            x:Name="txtSendTel"
+                            Width="210"
+                            HorizontalAlignment="Left"
+                            Style="{StaticResource waterMark}"
+                            Tag="핸드폰번호 입력" />
+                    </Border>
+                </DockPanel>
+                <DockPanel Margin="0,30,0,0" DockPanel.Dock="Top">
+                    <Label Width="130" Content="수신자" />
+                    <Border
+                        Width="210"
+                        Height="35"
+                        HorizontalAlignment="Left"
+                        Style="{StaticResource bdSearch}">
+                        <TextBox
+                            x:Name="txtReceiveTel"
+                            Width="210"
+                            HorizontalAlignment="Left"
+                            KeyDown="txtReceiveTel_KeyDown"
+                            Style="{StaticResource waterMark}"
+                            Tag="핸드폰번호 입력" />
+                    </Border>
+                    <Button
+                        Click="btnPlus_Click"
+                        Content="+"
+                        Style="{StaticResource MessagePlus}" />
+                </DockPanel>
+                <ScrollViewer
+                    Height="70"
+                    Margin="130,5,0,0"
+                    DockPanel.Dock="Top"
+                    VerticalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="spanTels">
+                        <CheckBox Margin="0,10,0,0" Content="01012345678" />
+                        <CheckBox Margin="0,10,0,0" Content="01012345678" />
+                        <CheckBox Margin="0,10,0,0" Content="01012345678" />
+                    </StackPanel>
+                </ScrollViewer>
+                <DockPanel Margin="130,15,0,0" DockPanel.Dock="Top">
+                    <Button
+                        Width="80"
+                        Height="35"
+                        Click="btnTelsDelete_Click"
+                        Content="선택 삭제"
+                        Style="{StaticResource btnBorder}"
+                        TextBlock.FontWeight="Bold" />
+                    <Button
+                        Click="btnReceiveUsers_Click"
+                        Content="수신자 선택"
+                        Style="{StaticResource btnGreenBorder}" />
+                </DockPanel>
+
+                <DockPanel Margin="0,30,0,0" DockPanel.Dock="Top">
+                    <Label Width="130" Content="내용" />
+                    <ComboBox
+                        x:Name="cboMsgBox"
+                        Width="420"
+                        HorizontalAlignment="Left"
+                        DisplayMemberPath="msg_content"
+                        ItemsSource="{Binding}"
+                        SelectionChanged="cboMsgBox_SelectionChanged" />
+                </DockPanel>
+                <DockPanel
+                    Width="auto"
+                    Margin="130,15,0,0"
+                    DockPanel.Dock="Top">
+                    <Border
+                        Width="420"
+                        HorizontalAlignment="Left"
+                        Style="{StaticResource bdSearch}">
+                        <TextBox
+                            x:Name="txtComment"
+                            Width="420"
+                            Height="120"
+                            Margin="0,8,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            VerticalContentAlignment="Top"
+                            AcceptsReturn="True"
+                            Style="{StaticResource waterMark}"
+                            Tag="내용 입력"
+                            TextAlignment="Left"
+                            TextChanged="txtComment_TextChanged"
+                            TextWrapping="Wrap" />
+                    </Border>
+                </DockPanel>
+                <DockPanel Margin="130,0,0,30" DockPanel.Dock="Top">
+                    <TextBlock Text="SMS " />
+                    <TextBlock
+                        x:Name="txtCount"
+                        Foreground="#999999"
+                        Text="0" />
+                    <TextBlock Foreground="#999999" Text=" Byte" />
+                </DockPanel>
+                <Border CornerRadius="1" DockPanel.Dock="Top" />
+
+                <DockPanel
+                    Height="40"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom">
+                    <Button
+                        Click="btnClose_Click"
+                        Content="취소"
+                        Style="{StaticResource btnRoundBorder}" />
+                    <Button
+                        Click="btnSend_Click"
+                        Content="발송"
+                        Style="{StaticResource btnGreenRound}" />
+                </DockPanel>
+            </DockPanel>
+        </Border>
+
+        <Border
+            x:Name="borBackground"
+            Margin="0"
+            Padding="0"
+            Panel.ZIndex="101"
+            Background="#000"
+            Opacity="0.15"
+            Visibility="Collapsed" />
+    </Grid>
+</Window>
